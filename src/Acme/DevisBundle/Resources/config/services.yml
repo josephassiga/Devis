@@ -1,0 +1,7 @@
+parameters:
+#    acme_devis.example.class: Acme\DevisBundle\Example
+
+services:
+#    acme_devis.example:
+#        class: %acme_devis.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

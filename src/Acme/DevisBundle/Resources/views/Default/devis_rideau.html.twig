@@ -1,0 +1,277 @@
+{% extends "::base.html.twig"%}
+
+
+{% block title %}{{name}}{% endblock %}
+
+{% block body %}
+    <div id="formulaire">
+     <form {{ form_enctype(form) }} method="POST" class="niceform">
+     
+         
+           <fieldset>
+               <legend>Quantite</legend>                   
+                    <dl>
+                        <dt><label for="quantite">Quantite:</label></dt>                     
+                        <dd>{{ form_widget(form.quantite) }}</dd> 
+                    </dl>
+          </fieldset>
+         
+         <fieldset style="float: left">
+               <legend>Largeur</legend>
+               <dl style="width: 326px">
+                       <dd>
+                           <div style="float: left">
+                            {{ form_widget(form.largeur) }}{{ form_label(form.largeur) }}
+                            <br/>
+                               {% for child in form.coulisse %}
+                                     {{ form_widget(child) }}{{ form_label(child)}}<br/>
+                               {% endfor %}
+                          </div> 
+                       </dd>        
+              </dl>
+         </fieldset>
+                    
+         <fieldset>
+                   <legend>Hauteur</legend>
+               <dl style="width: 326px">
+                       <dd>
+                           <div style="float: left">
+                            {{ form_widget(form.hauteur) }}{{ form_label(form.hauteur) }}
+                            <br/>
+                            {% for child in form.hauteur_enroulement %}
+                                     {{ form_widget(child) }}{{ form_label(child)}}<br/>
+                            {% endfor %}
+                          </div> 
+                       </dd>        
+              </dl>
+            </fieldset>
+         
+         <fieldset>
+                   <legend>Manoeuvre</legend>
+               <dl> 
+                       <div style="float: left">
+                              <dt><label for="manoeuvre">Manoeuvre:</label></dt>
+                       </div>
+                       <dd>
+                           <div style="float: left">
+                               {% for child in form.manoeuvre %}
+                                     {{ form_widget(child) }}{{ form_label(child)}}<br/>
+                               {% endfor %}
+                            <br/>                           
+                          </div> 
+                       </dd>        
+              </dl>
+            </fieldset> 
+             
+          <fieldset style="float: left">
+                   <legend>Enroulement</legend>
+                   <dl style="width: 326px">
+                       <dd>
+                           <div style="float: left">
+                               {% for child in form.enroulement %}
+                                     {{ form_widget(child) }}{{ form_label(child)}}<br/>
+                               {% endfor %}
+                            <br/>                           
+                          </div> 
+                       </dd>        
+              </dl>
+            </fieldset> 
+         
+         <fieldset style="float: left">
+                   <legend>Sortie Fils</legend>
+               <dl style="width: 326px">                       
+                       <dd>
+                           <div style="float: left">
+                               {% for child in form.sortie_fils %}
+                                     {{ form_widget(child) }}{{ form_label(child)}}<br/>
+                               {% endfor %}
+                            <br/>                           
+                          </div> 
+                       </dd>        
+              </dl>
+            </fieldset> 
+                  
+          <fieldset>
+                   <legend>Tablier</legend>
+               <dl> 
+                       <div style="float: left">
+                              <dt><label for="tablier">Tablier:</label></dt>
+                       </div>
+                       <dd>
+                           <div style="float: left">
+                               {% for child in form.tablier %}
+                                     {{ form_widget(child) }}{{ form_label(child) }}<br/>
+                               {% endfor %}                                     
+                               {{ form_widget(form.serrure_sur_lame) }}{{ form_label(form.serrure_sur_lame) }}                                     
+                          </div> 
+                       </dd>   
+              </dl>
+            </fieldset>
+           <fieldset style="float: left">
+                   <legend>Axe</legend>
+               <dl style="width: 326px">
+                       <dd>
+                           <div style="float: left">
+                               {% for child in form.axe %}
+                                     {{ form_widget(child) }}{{ form_label(child) }}<br/>
+                               {% endfor %}                                    
+                          </div> 
+                       </dd>   
+              </dl>
+            </fieldset>
+         <fieldset style="float: left">
+                   <legend>Joues</legend>
+               <dl style="width: 326px;height: 90px">
+                       <dd>
+                           <div id="joues"  style="float: left">                               
+                               {% for child in form.joues %}
+                                     {{ form_widget(child) }}{{ form_label(child) }}<br/>
+                               {% endfor %}                                    
+                          </div> 
+                       </dd>   
+              </dl>
+            </fieldset>
+         
+         <fieldset>
+                   <legend>Accessoires</legend>
+               <dl> 
+                       <div style="float: left">
+                              <dt><label for="joues">Accessoires:</label></dt>
+                       </div>
+                       <dd>
+                           <div style="float: left">
+                               {% for child in form.boite %}
+                                     {{ form_widget(child) }}{{ form_label(child) }}<br/>
+                               {% endfor %}
+                               
+                               {% for child in form.boutton %}
+                                     {{ form_widget(child) }}{{ form_label(child) }}<br/>
+                               {% endfor %} 
+                                     
+                              
+                          </div>
+                               
+                       </dd>   
+              </dl>
+            </fieldset>
+         <fieldset>
+                   <legend>Options</legend>
+               <dl> 
+                       <div style="float: left">
+                              <dt><label for="options">options:</label></dt>
+                       </div>
+                       <dd>
+                           <div style="float: left">
+                               {% for child in form.coffre_laquage %}
+                                     {{ form_widget(child) }}{{ form_label(child) }}<br/>
+                               {% endfor %}
+                                {{ form_widget(form.numero_ral) }}{{ form_label(form.numero_ral) }}
+                          </div>
+                               
+                       </dd>   
+              </dl>
+            </fieldset> 
+                                                           
+       <fieldset>
+           <legend>Information Du Client</legend>
+                    <dl> 
+                        <dt><label for="nom">Nom:</label></dt>
+                        <dd>{{ form_widget(form.client.nom,{ 'attr': {'size':'30.5'}}) }}</dd>
+                    </dl>
+                    <dl> 
+                        <dt><label for="prenom">Prenom:</label></dt>
+                        <dd>{{ form_widget(form.client.prenom,{ 'attr': {'size':'30'}}) }}</dd>
+                    </dl>
+                     <dl> 
+                        <dt><label for="adresse">Adresse:</label></dt>
+                        <dd>{{ form_widget(form.client.adresse,{ 'attr': {'size':'30'}}) }}</dd>
+                    </dl>
+                    <dl> 
+                        <dt><label for="ville">Ville:</label></dt>
+                        <dd>{{ form_widget(form.client.ville,{ 'attr': {'size':'30'}}) }}</dd>
+                    </dl>
+                    <dl> 
+                        <dt><label for="code_postal">Code Postal:</label></dt>
+                        <dd>{{ form_widget(form.client.codepostal,{ 'attr': {'size':'30'}}) }}</dd>
+                    </dl>
+                    <dl> 
+                        <dt><label for="reference">Reference:</label></dt>
+                        <dd>{{ form_widget(form.client.reference,{ 'attr': {'size':'30'}}) }}</dd>
+                    </dl>
+                   <dl> 
+                        <dt><label for="telephone">Telephone:</label></dt>
+                        <dd>{{ form_widget(form.client.telephone,{ 'attr': {'size':'30'}}) }}</dd>
+                    </dl>
+                     <dl> 
+                        <dt><label for="observation">Observation:</label></dt>
+                        <dd>{{ form_widget(form.client.observation,{ 'attr': {'rows':'10', 'cols':'60'}}) }}</dd>
+                    </dl>
+       </fieldset>    
+         
+         <fieldset class="action">
+    	<input type="submit" name="submit" id="submit" value="Submit" />
+     </fieldset>
+    </form>
+   </div>
+{% endblock %}
+
+{%block javascripts %}        
+       <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+       <script src="{{asset('bundles/acmedevis/js/niceforms.js')}}" type="text/javascript"></script> 
+       {{parent()}}      
+       <script>
+       
+       $(document).ready(function(){
+           
+           //choix des joues.
+            $("#rideau_hauteur").blur(function(){
+               
+               //par défaut ce sont les joues 340 qui sont choisis.
+               if(($(this).val()> 3200) && ($(this).val()< 4800))//joues 370
+               {                      
+                   $("#rideau_joues_1").attr('checked', true); 
+               }
+               else if(($(this).val()> 4800))//joues 400
+               {
+                    $("#rideau_joues_2").attr('checked', true); 
+               }               
+             }); 
+             
+           //Choix de l'Axe.
+           $("#rideau_largeur").blur(function(){
+              
+             if(($(this).val() >= 5000) && ($(this).val() <= 6000))//Axe 76
+             {
+                 $("#rideau_axe_1").attr('checked', true); 
+             }
+           });
+             
+             
+       });
+       </script>
+       
+       <script>
+         $(function() {
+             $("#rideau_coulisse_0").attr('checked', true);
+             $("#rideau_hauteur_enroulement_0").attr('checked', true);
+             $("#rideau_manoeuvre_0").attr('checked', true);
+             $("#rideau_enroulement_0").attr('checked', true);
+             $("#rideau_sortie_fils_0").attr('checked', true);
+             $("#rideau_tablier_0").attr('checked', true);
+             $("#rideau_rideau_0").attr('checked', true);
+             $("#rideau_joues_0").attr('checked', true);
+             $("#rideau_axe_0").attr('checked', true);
+             $("#rideau_boite_0").removeAttr("required");
+             $("#rideau_boite_1").removeAttr("required");
+             $("#rideau_boite_2").removeAttr("required");                        
+                          
+         });
+           
+       </script>
+       
+       
+{%endblock%}
+  
+{%block stylesheets %}
+    <link href="{{asset('bundles/acmedevis/css/niceforms-default.css')}}" type="text/css" rel="stylesheet"/>
+{%endblock stylesheets %}

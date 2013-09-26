@@ -1,0 +1,12 @@
+acme_devis_homepage:
+    pattern:  /devis
+    defaults: { _controller: AcmeDevisBundle:Default:index }
+
+acme_devis:    
+    pattern:  /devis/{name}
+    defaults: { _controller: AcmeDevisBundle:Default:devis }
+
+acme_devis_commande:
+    pattern:  /facture/{name}
+    defaults: { _controller: AcmeDevisBundle:Default:facture}
+    

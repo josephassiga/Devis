@@ -1,0 +1,76 @@
+{%extends "::base.html.twig"%}
+
+{% block title %}{{ name }}{% endblock %}
+
+{% block body %}
+<div id="dialog" title="Choissisez votre Produit" style="display: none;">
+  <p>Des produits de qualités,faites votre choix.</p>
+  
+  <a  id="rideau" class="box" href="{{ path('acme_devis',{'name':'devis_rideau'}) }}" title="Rideau Métallique Complets">
+      <img src="{{asset('bundles/acmedevis/images/rideau_metallique_2.jpg')}}"  alt="Rideau Métallique Complets"> 
+      <span class="caption simple-caption">
+		<p id="title">Rideaux Métalliques Complets</p>
+     </span>
+  </a>
+  
+  <a id="axe" class="box" href="{{ path('acme_devis',{'name':'devis_axe'}) }}">
+      <img src="{{asset('bundles/acmedevis/images/axes_rideau.jpg')}}" alt="Axes de Rideau Métallique"/> 
+       <span class="caption simple-caption">
+           <p id="title">Axes de Rideau<br> Métallique</p>
+     </span>
+  </a>
+  
+  <a id="tablier" href="{{ path('acme_devis',{'name':'devis_tablier'}) }}" class="box">
+      <img src="{{asset('bundles/acmedevis/images/rideau_metallique.jpg')}}" alt="Tablier de Rideau Métallique"/>
+       <span class="caption simple-caption">
+           <p id="title">Tabliers de Rideau <br> Métallique</p>
+     </span>
+  </a>
+  
+</div>
+ 
+<a id="opener" title="Demandez votre Devis">
+      <img src="{{asset('bundles/acmedevis/images/devis.png')}}" alt="Demandez votre devis."/> 
+  </a>
+
+<div id="schema">
+
+    
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+     
+        <!-- Add jQuery library -->        
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script> 
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>         
+        {{parent()}}    
+        
+  <script type="text/javascript">
+  $(function() {
+    $( "#dialog" ).dialog({
+        autoOpen: false,
+        height: 400,
+        width: 700,
+        modal: true,
+        resizable:false,
+        draggable:false
+    });
+ 
+    $( "#opener" ).click(function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+   
+  
+  });
+  </script>
+  
+{% endblock %}
+
+{% block stylesheets %}
+  <link href="{{asset('http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')}}" type="text/css" rel="stylesheet"/>
+  <link href="{{asset('bundles/acmedevis/css/style.css')}}" type="text/css" rel="stylesheet" media="screen"/> 
+   <link href="{{asset('bundles/acmedevis/css/jquery-ui-1.10.3.custom.css')}}" type="text/css" rel="stylesheet"/>
+   <link href="{{asset('bundles/acmedevis/css/jquery-ui-1.10.3.custom.min.css')}}" type="text/css" rel="stylesheet"/>   
+{% endblock %}

@@ -1,0 +1,183 @@
+{%extends "::base.html.twig"%}
+
+{% block title %}Facture | {{ name }}{% endblock %}
+
+
+{% block body %}
+
+
+<div id="logo">
+    <a href="http://www.access-pro-fermetures.fr/" target="_blank"><img src="{{asset('bundles/acmedevis/images/logo_1.jpg')}}" alt="Access Pro Fermeture" /></a>  
+</div>
+
+<div id="devis" >
+
+    <table class="ui-widget ui-widget-content" >
+        <thead>
+            <tr><th colspan="3">DEVIS</th></tr>
+        </thead>
+        <tbody>
+            <tr class="ui-widget-header ">
+                <th> N° Devis</th>
+                <th> Date</th>
+                <th> Code Client</th>
+            </tr>
+             <tr>
+                 <td> DC{{random(1000)}}</td>
+                <td> {{"now" |date("d/m/Y","Europe/Paris")}}</td>
+                <td> CL{{random(1000)}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+   
+<div id="adresse">    
+  <p>11 RUE JEAN ROUXEL</p>
+  <p>Lot N°6</p>
+  <p>ZAC LA PENTECOTE</p>
+  <p>44700 Orvault</p> 
+  <p>Tél: 0251787695 - Fax: 0251787697</p>
+  <p>R.C.S. : NANTES</p>
+  <p>Mode de paiement:</p>
+  <p>Date de validité:{{"now"|date_modify("+1 month")| date("d/m/Y")}}</p>
+</div>
+    
+<div id="titre">
+    <p><strong>{{devis.client.nom}}</strong></p>
+    <p><strong>{{devis.client.prenom}}</strong></p>
+    <p>{{devis.client.adresse}}</p>
+    <p>{{devis.client.ville}}</p>
+    <p>{{devis.client.telephone}}</p>
+    <p>{{devis.client.codepostal}}</p>
+</div>     
+
+<div id="grille" style=" float: bottom;width: 800px" >
+
+    <table>
+        <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+              <th>Quantité</th>
+              <th>Prix HT</th>
+              <th>Total HT</th>
+              <th>T*TVA </th>
+          </tr>
+        </thead>
+        <tbody>
+              <tr>
+                  <td>AR0024</td>
+                  <td>Forfait main d'eouvre 2 personnes </td>
+                  <td>1,0</td>
+                  <td>538,80</td>
+                  <td>538,80</td>
+                  <td>19,60</td>
+              </tr>
+              <tr>
+                  <td>AR0016</td>
+                  <td>REMISE COMMERCIAL</td>
+                  <td>1,0</td>
+                  <td>-430,38</td>
+                  <td>-430,38</td>
+                  <td>19,60</td>
+              </tr>
+              <tr>
+                  <td>AR009</td>
+                  <td>
+                      Axe motorisé à ressort boite 220 pour
+                   {% if devis.tablier == 0%}
+                       tablier lame pleine acier galvanisé 7/10 éme<br/>
+                   {%elseif devis.tablier == 1%}
+                        tablier lame pleine acier galvanisé 9/10 éme<br/> 
+                   {%elseif devis.tablier == 2%}
+                       tablier lame pleine micro perforées acier galvanisé 9/10 éme<br/> 
+                   {%endif%}     
+                  <h3>LARGEUR CC : {{devis.largeur}}</h3>
+                  <h3>HAUTEUR SE : {{devis.hauteur}}</h3> <br/>
+                  {%if devis.enroulement == 0%}
+                       Enroulement INTERIEUR
+                  {%elseif devis.enroulement == 1%}
+                       Enroulement EXTERIEUR
+                  {%endif%}
+                  Motorisation ELSAMEC 220V mono avec electrofrein, parachute intégré. <br/>
+                  {%if devis.manoeuvre == 0%}
+                      manoeuvre par cable de debrayage
+                  {%elseif devis.manoeuvre  == 1%}
+                      manoeuvre manuelle
+                  {%elseif devis.manoeuvre  == 2%}
+                       manoeuvre par moyeur tubulaire
+                  {%endif%}
+                  fixation plat bombe sur longueur.
+                  </td>
+                  <td>1,0</td>
+                  <td>{{prix|number_format(2, ',', '')}}</td>
+                  <td>{{prix|number_format(2, ',', '')}}</td>
+                  <td>19,60</td>
+              </tr>
+        </tbody>
+       
+    </table>
+</div>
+
+<div id="paie">
+
+    <table>
+        <thead>
+            <tr>
+                <th>%TVA</th>
+                <th>Base</th>
+                <th>Montant TVA</th>
+                <th>Total HT</th>
+                <th>Total TVA</th>            
+                <th>Total TTC</th>
+                <th>Net à Payer </th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr>
+                <td>19,60</td>
+                <td>{{ 538.80 - 430.60 + prix |number_format(2,',','')}}</td>
+                <td>{{ ((538.80 - 430.60 + prix ) / 19.60) |number_format(2, ',', '.')}}</td>
+                <td>{{ 538.80 - 430.60 + prix |number_format(2,',','')}}</td>
+                <td>{{ ((538.80 - 430.60 + prix ) / 19.60) |number_format(2, ',', '.')}}</td>  
+                <td>{{((1 + 1 / 19.60) * (538.80 - 430.60 + prix ))|number_format(2, ',','')}}</td>
+                <td>{{((1 + 1 / 19.60) * (538.80 - 430.60 + prix ))|number_format(2, ',','')}}€</td>
+            </tr>
+        
+        </tbody>
+    </table>
+</div>
+
+
+<div style="float: right">
+    <h4>Cachet et signature précédé de <strong>BON POUR ACCORD</strong></h4>
+</div>
+
+<div id="impression"> 
+    <a href="javascript:window.print()"><img src="{{asset('bundles/acmedevis/images/imprimer.gif')}}" alt="Imprimer cette page" />Imprimer</a>
+</div>
+
+<hr style="width:500px; height:1px; float: left;margin-top: 50px;background-color: black" /> 
+
+<div id="siret">
+    Société à resposabilité limitée au capital de 15000,00 euros - SIRET : 78979196900015
+</div>
+
+
+
+{% endblock %}
+ 
+
+{% block javascripts %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script> 
+    <script src="http://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script> 
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script> 
+{% endblock %}
+
+
+{% block stylesheets %}
+   <!-- <link href="{{asset('bundles/acmedevis/css/niceforms-default.css')}}" type="text/css" rel="stylesheet"/>-->
+    <link href="{{asset('bundles/acmedevis/css/style.css')}}" type="text/css" rel="stylesheet"/> 
+    <link href="{{asset('http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')}}" type="text/css" rel="stylesheet"/>
+{% endblock %}

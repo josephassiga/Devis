@@ -1,0 +1,4 @@
+acme_devis:
+    resource: "@AcmeDevisBundle/Resources/config/routing.yml"
+    prefix:   /
+
